@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { Hero } from './shared';
+import { HeroDetailComponent } from './hero-detail';
+import { Hero } from './hero';
 
 const HEROES: Hero[] = [
   { id: 11, name: 'Mr. Nice' },
@@ -19,7 +20,8 @@ const HEROES: Hero[] = [
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+  styleUrls: ['app.component.css'],
+  directives: [HeroDetailComponent],
 })
 export class AppComponent {
   title = 'Tour of Heroes';
