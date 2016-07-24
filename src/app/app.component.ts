@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
-import { Hero } from './hero';
-import { HeroDetailComponent } from './hero-detail';
 import { HeroService } from './hero.service';
 
 @Component({
@@ -9,23 +8,11 @@ import { HeroService } from './hero.service';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [HeroDetailComponent],
+  directives: [ROUTER_DIRECTIVES],
   providers: [HeroService],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+
   title = 'Tour of Heroes';
-  heroes: Hero[];
-  selectedHero: Hero;
 
-  constructor(private heroService: HeroService) {}
-
-  getHeroes() {
-    this.heroService.getHeroes().then(heros => this.heroes = heros);
-  }
-
-  ngOnInit() {
-    this.getHeroes();
-  }
-
-  onSelect(hero: Hero) { this.selectedHero = hero; }
 }
