@@ -3,12 +3,14 @@ import { Router } from '@angular/router';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { HeroSearchComponent } from '../hero-search';
 
 @Component({
   moduleId: module.id,
   selector: 'app-dashboard',
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.css'],
+  directives: [HeroSearchComponent],
 })
 export class DashboardComponent implements OnInit {
 
@@ -20,7 +22,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes.slice(1,5));
   }
 
   gotoDetail(hero: Hero) {
