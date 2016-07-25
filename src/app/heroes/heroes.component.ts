@@ -14,6 +14,8 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
 
+  addingHero: boolean = false;
+  error: any;
   heroes: Hero[];
   selectedHero: Hero;
 
@@ -21,6 +23,29 @@ export class HeroesComponent implements OnInit {
     private heroService: HeroService,
     private router: Router
   ) {}
+
+  addHero() {
+    this.addingHero = true;
+    this.selectedHero = null;
+  }
+
+  close(savedHero: Hero) {
+    this.addingHero = false;
+    if (savedHero) {
+      this.getHeroes();
+    }
+  }
+
+  deleteHero(hero: Hero, event: any) {
+    event.stopPropagation();
+    this.heroService
+      .delete(hero)
+      .then(res => {
+        this.heroes = this.heroes.filter(h => h !== hero);
+        if (this.selectedHero === hero) { this.selectedHero = null; }
+      })
+      .catch(error => this.error = error);
+  }
 
   getHeroes() {
     this.heroService.getHeroes().then(heros => this.heroes = heros);
